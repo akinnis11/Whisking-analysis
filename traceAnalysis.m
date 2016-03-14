@@ -91,15 +91,10 @@ for i = 1:nFrames
         isWhisker(j) = checkTrace_b(follicleX,follicleY,whiskerTipX,whiskerTipY,xThresh1,yThresh1,xThresh2,yThresh2,...
             minLength,faceEdgeX,faceEdgeY,minFollicleDistance,faceAngle,whiskAngle);
         
-        %         whiskers(t).x,whiskers(t).y,xThresh1,yThresh1,xThresh2,yThresh2,...
-        %             minLength,faceEdgeX,faceEdgeY,minFollicleDistance,faceAngle,whiskers(t).whiskAngle);
-        %
-        %noWhiskerInd(z) = [];tr
         if isequal(isWhisker(j),0)
             if isequal(plotFig,'y')
                 plot([follicleX whiskerTipX],[follicleY whiskerTipY],'-r','MarkerSize',20) %Rejected whisker objects
             end
-            
             measurements(t).fid = NaN;
             measurements(t).follicle_x = [];
             measurements(t).follicle_y = [];
@@ -116,19 +111,7 @@ for i = 1:nFrames
                 plot([follicleX whiskerTipX],[follicleY whiskerTipY],'-g','MarkerSize',20)
                 plot([follicleX whiskerTipX],[follicleY whiskerTipY],'.b','MarkerSize',20)
             end
-            %The whisker tip is the first point in the traced object. This
-            %usually works fine, but may need to be refined in some cases
             
-            %whiskerTipX = whiskers(t).x(1);
-            %whiskerTipY = whiskers(t).y(1);
-            
-            %plot(follicleX,follicleY,'.b','MarkerSize',20)
-            %plot(whiskerTipX,whiskerTipY,'.b','MarkerSize',20)
-            
-            %measurements(t).follicle_x = [follicleX follicleY];
-            %whiskers(t).tip = [whiskerTipX whiskerTipY];
-            
-            %whiskers(t).whiskAngle = calcWhiskAngle(follicleX,follicleY,whiskerTipX,whiskerTipY,faceAngle);
             whiskerAngles(j) = whiskAngle;
         end
         
@@ -143,15 +126,8 @@ for i = 1:nFrames
     
     if isequal(plotFig,'y')
         figure(1)
-        %hold on
-        %plot(i,whiskerPosition(i),'.-b')
-        %axis([0 nFrames 0 1])
-        %axis 'auto y'
         title(sprintf('%s','Frame ',num2str(i-1),': Median whisker angle = ',num2str(whiskerPosition_median(i)),' degrees'))
-        %whiskerFrames(i) = getframe;
-        %input('continue?')
         hold off
-        %clf
     end
 end
 whiskersAll = measurements(1:t);
